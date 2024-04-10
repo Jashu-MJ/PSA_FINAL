@@ -7,6 +7,7 @@ package ui.customer;
 import javax.swing.JPanel;
 import org.example.Ecosystem;
 
+
 /**
  *
  * @author marri
@@ -73,6 +74,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
             }
         });
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,6 +124,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

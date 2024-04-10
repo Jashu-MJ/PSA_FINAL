@@ -31,12 +31,14 @@ import ui.manager.ManagerJPanel;
 public class WorkAreaMainFrame extends javax.swing.JFrame {
 
     Ecosystem es;
+
     /**
      * Creates new form PricingMainFrame
      */
     public WorkAreaMainFrame() {
         initComponents();
             es = ConfigureSystem.initialize();
+
 
     }
 
@@ -118,6 +120,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                     .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,6 +210,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
     private void btnSignupLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupLoginButtonActionPerformed
+
         // TODO add your handling code here:
 //        SignupJPanel signupJPanel = new SignupJPanel(business, CardSequencePanel);
 //        CardSequencePanel.removeAll();
@@ -245,5 +249,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtUsername;
+
     // End of variables declaration//GEN-END:variables
 }

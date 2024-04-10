@@ -7,6 +7,7 @@ package ui.manager;
 import javax.swing.JPanel;
 import org.example.Ecosystem;
 
+
 /**
  *
  * @author marri
@@ -100,6 +101,7 @@ public class ManagerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
