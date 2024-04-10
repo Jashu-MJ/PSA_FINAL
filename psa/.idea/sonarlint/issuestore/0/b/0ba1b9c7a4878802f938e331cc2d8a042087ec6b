@@ -1,0 +1,25 @@
+
+˜	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹¢€•şÿÿÿÿ8ÅôÑÇæ1J$63e72325-58c7-48ec-8cb9-a945dc0bdce0
+“	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«©Úˆ8ÆôÑÇæ1J$4cb7c19b-9f6f-44d0-a3db-d5e1c2443c3d
+˜	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆëéúÿÿÿÿ8ÆôÑÇæ1J$e7002c8e-82f4-4711-a0cc-de861691faf3
+‹
+java:S2095&"HUse try-with-resources or close this "Connection" in a "finally" clause.(ÈÅàŠ8ôôÑÇæ1J$82761f37-4e55-497e-a88a-27c16dcdd782
+
+java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(íñéşÿÿÿÿ8ôôÑÇæ1J$c32d90f8-3078-4c40-8e9a-f4dfde2c627a
+“
+java:S1854$"KRemove this useless assignment to local variable "CONN_FACTORY_CLASS_NAME".(ÅÁ Ãùÿÿÿÿ8öôÑÇæ1J$125a3668-e64a-4f56-8add-78412438bd0f
+m
+java:S3457"%String contains no format specifiers.(Šª„ıÿÿÿÿ8÷ôÑÇæ1J$a279d28c-2f56-4f5e-8189-5d7311d3a535
+r	java:S106"+Replace this use of System.out by a logger.(Šª„ıÿÿÿÿ8÷ôÑÇæ1J$4db82c57-0170-412f-8efb-f12c2d7ac156
+r	java:S106"+Replace this use of System.out by a logger.(Ğö¶üÿÿÿÿ8øôÑÇæ1J$e0a15243-e816-48b4-bf24-6867d1ea34e3
+r	java:S106"+Replace this use of System.out by a logger.(ß€ŒŞøÿÿÿÿ8ûôÑÇæ1J$04ff6367-0085-45ca-8430-ca812da8e7c1
+r	java:S106"+Replace this use of System.out by a logger.(ƒ­¾’ÿÿÿÿÿ8ıôÑÇæ1J$33c8622b-d870-4fbc-bdf4-6999b2563e00
+ƒ	java:S125"<This block of commented-out lines of code should be removed.(ô€È›øÿÿÿÿ8ıôÑÇæ1J$d67066d7-ceea-41de-bf28-90faf4cf2126
+„
+java:S1481$"<Remove this unused "CONN_FACTORY_CLASS_NAME" local variable.(ÅÁ Ãùÿÿÿÿ8ıôÑÇæ1J$1b6a7264-820c-475c-b6f8-fb284347dfac
+p
+java:S4925%"-Remove this "Class.forName()", it is useless.(ùíÄé8şôÑÇæ1J$55a51d98-bf73-4a9a-a602-e9e4b4dfec1f
+y
+java:S6437&"6Revoke and change this password, as it is compromised.(ÈÅàŠ8ÿôÑÇæ1J$152ad4bb-2d7f-468b-9a76-79cc3ee872fc
+m	java:S1060"+Replace this use of System.out by a logger.(ÆÀûı8€õÑÇæ1J$de7681ec-b0fd-492d-bda8-b8780f9c7397
+r	java:S106C"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8€õÑÇæ1J$09c0598f-ae0a-451d-9603-492b857844dc
