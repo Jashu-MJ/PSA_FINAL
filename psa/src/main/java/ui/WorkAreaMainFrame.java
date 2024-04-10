@@ -6,8 +6,23 @@
 package ui;
 
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.example.ConfigureSystem;
+import org.example.Ecosystem;
+import org.example.persona.Customer;
+import org.example.dsa.ArrayBag;
+import org.example.utils.DBConn;
+import org.example.utils.Utils;
+import ui.customer.CustomerHomeJPanel;
+import ui.deliveryPartner.DPHomeJPanel;
+import ui.manager.ManagerJPanel;
+
 
 /**
  *
@@ -15,12 +30,13 @@ import javax.swing.JPanel;
  */
 public class WorkAreaMainFrame extends javax.swing.JFrame {
 
-
+    Ecosystem es;
     /**
      * Creates new form PricingMainFrame
      */
     public WorkAreaMainFrame() {
         initComponents();
+            es = ConfigureSystem.initialize();
 
     }
 
@@ -40,8 +56,9 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         PasswordTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnSignup = new javax.swing.JButton();
         ddUser = new javax.swing.JComboBox<>();
+        txtUsername = new javax.swing.JTextField();
         CardSequencePanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -70,19 +87,21 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        jButton2.setText("Sign Up");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSignup.setText("Sign Up");
+        btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2LoginButtonActionPerformed(evt);
+                btnSignupLoginButtonActionPerformed(evt);
             }
         });
 
-        ddUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", "Nurse", "Lab Ast","Pharmacist","Manager" }));
+        ddUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Manager", "Del Partner"}));
         ddUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ddUserActionPerformed(evt);
             }
         });
+
+        txtUsername.setText("username");
 
         javax.swing.GroupLayout actionsidejpanelLayout = new javax.swing.GroupLayout(actionsidejpanel);
         actionsidejpanel.setLayout(actionsidejpanelLayout);
@@ -95,15 +114,19 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSignup)
+                    .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(actionsidejpanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
+                .addGap(4, 4, 4)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,7 +135,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(ddUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -136,6 +159,46 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
         //      WorkAreaJPanel ura = new WorkAreaJPanel(workareajpanl);
+        
+        String un = txtUsername.getText();
+        String pw = PasswordTextField.getText();
+        ArrayBag<Customer> testBag = new ArrayBag<Customer>();
+        Connection conn = DBConn.establishConnection();
+
+        if ("Customer".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
+            
+            if (!(Utils.authenticateUser(es,"customer", un, pw))) {
+            JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
+            return;
+        }
+            CustomerHomeJPanel customerHomeJPanel = new CustomerHomeJPanel(es, CardSequencePanel);
+            CardSequencePanel.removeAll();
+            CardSequencePanel.add("customer", customerHomeJPanel);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        }
+        if ("Manager".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
+                    
+            if(!(Utils.authenticateUser(es, "manager", un, pw))) {
+            JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
+            return;
+        }
+            ManagerJPanel managerJPanel = new ManagerJPanel(es, CardSequencePanel);
+            CardSequencePanel.removeAll();
+            CardSequencePanel.add("Manager", managerJPanel);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        }
+        if ("Del Partner".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
+                    
+            if(!(Utils.authenticateUser(es,"dp", un, pw))) {
+            JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
+            return;
+        }
+            DPHomeJPanel dPHomeJPanel = new DPHomeJPanel(es, CardSequencePanel);
+            CardSequencePanel.removeAll();
+            CardSequencePanel.add("Dp", dPHomeJPanel);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        }
+
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -143,13 +206,13 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
-    private void jButton2LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2LoginButtonActionPerformed
+    private void btnSignupLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupLoginButtonActionPerformed
         // TODO add your handling code here:
 //        SignupJPanel signupJPanel = new SignupJPanel(business, CardSequencePanel);
 //        CardSequencePanel.removeAll();
 //        CardSequencePanel.add("SignUp", signupJPanel);
 
-    }//GEN-LAST:event_jButton2LoginButtonActionPerformed
+    }//GEN-LAST:event_btnSignupLoginButtonActionPerformed
 
     private void ddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddUserActionPerformed
         // TODO add your handling code here:
@@ -175,11 +238,12 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane SplitHomeArea;
     private javax.swing.JTextField UserNameTextField;
     private javax.swing.JPanel actionsidejpanel;
+    private javax.swing.JButton btnSignup;
     private javax.swing.JComboBox<String> ddUser;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,16 +4,24 @@
  */
 package ui.manager;
 
+import javax.swing.JPanel;
+import org.example.Ecosystem;
+
 /**
  *
  * @author marri
  */
 public class ManagerJPanel extends javax.swing.JPanel {
 
+     Ecosystem es;
+    javax.swing.JPanel CardSequencePanel;
+
     /**
      * Creates new form ManagerJPanel
      */
-    public ManagerJPanel() {
+    public ManagerJPanel(Ecosystem eco, JPanel clp) {
+        this.es=es;
+        this.CardSequencePanel = clp;
         initComponents();
     }
 
@@ -90,6 +98,8 @@ public class ManagerJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
