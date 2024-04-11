@@ -58,7 +58,9 @@ public class Main {
                 + "  "
                 + rs.getString(6)
                 + "  "
-                + rs.getString(7));
+                + rs.getString(7) 
+                + "  "
+                + rs.getString(8));
       }
 
       // Step 6: Close the connection

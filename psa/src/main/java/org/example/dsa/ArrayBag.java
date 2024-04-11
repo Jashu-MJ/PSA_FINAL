@@ -5,7 +5,8 @@ package org.example.dsa;
  * A class of bags whose entries are stored in a fixed-size array.
  */
 
-public final class ArrayBag<T> implements BagInterface<T> {
+public class ArrayBag<T> implements BagInterface<T> {
+
 
     private final T[] bag;
     private int numberOfEntries;
@@ -66,7 +67,9 @@ public final class ArrayBag<T> implements BagInterface<T> {
     /** Retrieves all entries that are in this bag.
      * @return A newly allocated array of all the entries in the bag. 
      */
-    public T[] toArray() {
+
+    public final T[] toArray() {
+
         // the cast is safe because the new array contains null entries
         @SuppressWarnings("unchecked")
         T[] result = (T[]) new Object[numberOfEntries]; // unchecked cast
@@ -75,6 +78,14 @@ public final class ArrayBag<T> implements BagInterface<T> {
         } // end for
         return result;
     } // end toArray
+/*
+    public T[] toArray() {
+    @SuppressWarnings("unchecked")
+    T[] result = (T[]) java.lang.reflect.Array.newInstance(bag.getClass().getComponentType(), numberOfEntries);
+    System.arraycopy(bag, 0, result, 0, numberOfEntries);
+    return result;
+}
+    */
 
     /** Sees whether this bag is full.
      * @return True if the bag is full, or false if not. 

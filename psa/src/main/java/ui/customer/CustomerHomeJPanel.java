@@ -4,16 +4,25 @@
  */
 package ui.customer;
 
+import javax.swing.JPanel;
+import org.example.Ecosystem;
+
+
 /**
  *
  * @author marri
  */
 public class CustomerHomeJPanel extends javax.swing.JPanel {
 
+    Ecosystem es;
+    javax.swing.JPanel CardSequencePanel;
+
     /**
      * Creates new form CustomerHomeJPanel
      */
-    public CustomerHomeJPanel() {
+    public CustomerHomeJPanel(Ecosystem eco, JPanel clp) {
+        this.es=es;
+        this.CardSequencePanel = clp;
         initComponents();
     }
 
@@ -59,6 +68,12 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
         btnMealStatus.setText("Meal Status");
 
         jButton5.setText("Logout");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,6 +119,12 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBookActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

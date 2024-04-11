@@ -1,25 +1,26 @@
 
-˜	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹¢€•şÿÿÿÿ8ÅôÑÇæ1J$63e72325-58c7-48ec-8cb9-a945dc0bdce0
-“	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«©Úˆ8ÆôÑÇæ1J$4cb7c19b-9f6f-44d0-a3db-d5e1c2443c3d
-˜	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆëéúÿÿÿÿ8ÆôÑÇæ1J$e7002c8e-82f4-4711-a0cc-de861691faf3
-‹
-java:S2095&"HUse try-with-resources or close this "Connection" in a "finally" clause.(ÈÅàŠ8ôôÑÇæ1J$82761f37-4e55-497e-a88a-27c16dcdd782
-
-java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(íñéşÿÿÿÿ8ôôÑÇæ1J$c32d90f8-3078-4c40-8e9a-f4dfde2c627a
-“
-java:S1854$"KRemove this useless assignment to local variable "CONN_FACTORY_CLASS_NAME".(ÅÁ Ãùÿÿÿÿ8öôÑÇæ1J$125a3668-e64a-4f56-8add-78412438bd0f
+Ëœ	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â€¹Â¢â‚¬â€¢Ã¾Ã¿Ã¿Ã¿Ã¿8Ã…Ã´Ã‘Ã‡Ã¦1J$072f78da-1ae6-4ce8-b532-e45a0a6d7dbe
+â€œ	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â«Â©ÃšË†8Ã†Ã´Ã‘Ã‡Ã¦1J$66a8536f-3175-4e01-a371-4f16092a2f29
+Ëœ	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë†Ã«ÂÃ©ÃºÃ¿Ã¿Ã¿Ã¿8Ã†Ã´Ã‘Ã‡Ã¦1J$e21dd6f1-b6de-46b3-977c-185957bee054
+Â
+java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ã­Ã±Ã©ÂÃ¾Ã¿Ã¿Ã¿Ã¿8Ã´Ã´Ã‘Ã‡Ã¦1J$77bf515b-84e0-4c42-b7bb-d3a266bef476
+â€¹
+java:S2095&"HUse try-with-resources or close this "Connection" in a "finally" clause.(ÃˆÃ…Ã Å 8Ã´Ã´Ã‘Ã‡Ã¦1J$50ef3107-c046-4322-af9b-0a8477007928
+â€œ
+java:S1854$"KRemove this useless assignment to local variable "CONN_FACTORY_CLASS_NAME".(Ã…ÃÂ ÃƒÃ¹Ã¿Ã¿Ã¿Ã¿8Ã¶Ã´Ã‘Ã‡Ã¦1J$5b6f98fe-011c-44f1-b35e-017a6b18261a
 m
-java:S3457"%String contains no format specifiers.(Šª„ıÿÿÿÿ8÷ôÑÇæ1J$a279d28c-2f56-4f5e-8189-5d7311d3a535
-r	java:S106"+Replace this use of System.out by a logger.(Šª„ıÿÿÿÿ8÷ôÑÇæ1J$4db82c57-0170-412f-8efb-f12c2d7ac156
-r	java:S106"+Replace this use of System.out by a logger.(Ğö¶üÿÿÿÿ8øôÑÇæ1J$e0a15243-e816-48b4-bf24-6867d1ea34e3
-r	java:S106"+Replace this use of System.out by a logger.(ß€ŒŞøÿÿÿÿ8ûôÑÇæ1J$04ff6367-0085-45ca-8430-ca812da8e7c1
-r	java:S106"+Replace this use of System.out by a logger.(ƒ­¾’ÿÿÿÿÿ8ıôÑÇæ1J$33c8622b-d870-4fbc-bdf4-6999b2563e00
-ƒ	java:S125"<This block of commented-out lines of code should be removed.(ô€È›øÿÿÿÿ8ıôÑÇæ1J$d67066d7-ceea-41de-bf28-90faf4cf2126
-„
-java:S1481$"<Remove this unused "CONN_FACTORY_CLASS_NAME" local variable.(ÅÁ Ãùÿÿÿÿ8ıôÑÇæ1J$1b6a7264-820c-475c-b6f8-fb284347dfac
+java:S3457"%String contains no format specifiers.(Å ÂªÅ¾â€Ã½Ã¿Ã¿Ã¿Ã¿8Ã·Ã´Ã‘Ã‡Ã¦1J$5f187491-8945-4e5b-9302-9d4f33d9c904
+r	java:S106"+Replace this use of System.out by a logger.(Å ÂªÅ¾â€Ã½Ã¿Ã¿Ã¿Ã¿8Ã·Ã´Ã‘Ã‡Ã¦1J$baf7722d-f2b5-4459-8cc4-1f8fac09bbf6
+r	java:S106"+Replace this use of System.out by a logger.(ÃÃ¶Â¶Å¾Ã¼Ã¿Ã¿Ã¿Ã¿8Ã¸Ã´Ã‘Ã‡Ã¦1J$b451483b-3319-4e23-a1f0-bfd08c8a11e9
+r	java:S106"+Replace this use of System.out by a logger.(ÃŸâ‚¬Å’ÃÃ¸Ã¿Ã¿Ã¿Ã¿8Ã»Ã´Ã‘Ã‡Ã¦1J$24c82545-49b8-48cd-9c07-c6ee3d5c6bd6
+r	java:S106"+Replace this use of System.out by a logger.(Æ’Â­Â¾â€™Ã¿Ã¿Ã¿Ã¿Ã¿8Ã½Ã´Ã‘Ã‡Ã¦1J$1dbd2a2d-8aee-4e89-a115-39f3fcc6f247
+Æ’	java:S125"<This block of commented-out lines of code should be removed.(Ã´â‚¬Ãˆâ€ºÃ¸Ã¿Ã¿Ã¿Ã¿8Ã½Ã´Ã‘Ã‡Ã¦1J$e7263b6f-a270-40bc-81ba-7688830ab251
+â€
+java:S1481$"<Remove this unused "CONN_FACTORY_CLASS_NAME" local variable.(Ã…ÃÂ ÃƒÃ¹Ã¿Ã¿Ã¿Ã¿8Ã½Ã´Ã‘Ã‡Ã¦1J$1c55a23c-601d-4b69-a325-4db15ad13160
 p
-java:S4925%"-Remove this "Class.forName()", it is useless.(ùíÄé8şôÑÇæ1J$55a51d98-bf73-4a9a-a602-e9e4b4dfec1f
+java:S4925%"-Remove this "Class.forName()", it is useless.(Ã¹Ã­Ã„Ã©8Ã¾Ã´Ã‘Ã‡Ã¦1J$6dba3c83-c0f5-4e60-82d7-9e5c200f3c27
 y
-java:S6437&"6Revoke and change this password, as it is compromised.(ÈÅàŠ8ÿôÑÇæ1J$152ad4bb-2d7f-468b-9a76-79cc3ee872fc
-m	java:S1060"+Replace this use of System.out by a logger.(ÆÀûı8€õÑÇæ1J$de7681ec-b0fd-492d-bda8-b8780f9c7397
-r	java:S106C"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8€õÑÇæ1J$09c0598f-ae0a-451d-9603-492b857844dc
+java:S6437&"6Revoke and change this password, as it is compromised.(ÃˆÃ…Ã Å 8Ã¿Ã´Ã‘Ã‡Ã¦1J$15d8dc94-a2f5-40e6-853b-9c064b0493e7
+m	java:S1060"+Replace this use of System.out by a logger.(Ã†Ã€Ã»Ã½8â‚¬ÃµÃ‘Ã‡Ã¦1J$01c822ea-a14a-4147-99c8-ae527a698a16
+r	java:S106E"+Replace this use of System.out by a logger.(Â¨Â¶Ã‘ÃÃ¾Ã¿Ã¿Ã¿Ã¿8â‚¬ÃµÃ‘Ã‡Ã¦1J$7caaa674-627f-438d-9479-d43cff2abca0
+
