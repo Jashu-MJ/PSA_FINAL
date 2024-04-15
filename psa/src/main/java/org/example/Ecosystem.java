@@ -20,6 +20,8 @@ public class Ecosystem {
     CustomerDirectory customerDirectory;
     //ManagerDirectory managerDirectory;
     DPDirectory dPDirectory;
+    LocationDirectory locDirectory;
+    BookingDirectory bookingDirectory;
     Connection conn;
 
     public Ecosystem(String name){
@@ -27,7 +29,9 @@ public class Ecosystem {
         this.conn = DBConn.establishConnection();
         customerDirectory = new CustomerDirectory(DBConn.getCustomersFromDB(this.conn));
         //managerDirectory = new ManagerDirectory();
-        dPDirectory = new DPDirectory(DBConn.getDPFromDB(this.conn));   
+        dPDirectory = new DPDirectory(DBConn.getDPFromDB(this.conn));
+        locDirectory = new LocationDirectory(DBConn.getLocFromDB(this.conn));
+        bookingDirectory = new BookingDirectory(DBConn.getBookFromDB(this.conn));
     }
     
     public void refreshCustomers(){

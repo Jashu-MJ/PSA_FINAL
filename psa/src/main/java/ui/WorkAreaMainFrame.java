@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.example.BookingDirectory;
 import org.example.ConfigureSystem;
 import org.example.Ecosystem;
 import org.example.persona.Customer;
@@ -39,6 +40,8 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     public WorkAreaMainFrame() {
         initComponents();
             es = ConfigureSystem.initialize();
+        
+        
 
 
     }

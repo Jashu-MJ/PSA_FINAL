@@ -4,15 +4,14 @@
  */
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import org.example.dsa.ArrayBag;
 import org.example.persona.Customer;
 import org.example.persona.DelPartner;
 
-/**
- *
- * @author marri
- */
+
 public class DPDirectory {
     ArrayBag<DelPartner> dpList;
     DelPartner[] dps;
@@ -65,4 +64,19 @@ public class DPDirectory {
         }
         return null; //not found after going through the whole list
     }
+    
+    // Method to retrieve a list of delivery partner names
+    public List<String> getAllDPNames() {
+        List<String> dpNames = new ArrayList<>();
+    
+    // Iterate through the array of DelPartner objects (dps)
+    for (DelPartner dp : dps) {
+        dpNames.add(dp.getName()+" - "+dp.getId());
+        
+    }
+    
+    // Return the list of delivery partner names
+    return dpNames;
+    }
+    
 }
