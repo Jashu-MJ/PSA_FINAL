@@ -15,16 +15,11 @@ import org.example.persona.Customer;
  */
 public class CustomerDirectory {
     ArrayBag<Customer> customerList;
-    Customer[] custs;
-    public CustomerDirectory() {
 
-        customerList = new ArrayBag<Customer>();
-    }
-    
     public CustomerDirectory(ArrayBag<Customer> cList) {
         customerList = cList;
-        custs = (Customer[]) java.lang.reflect.Array.newInstance(Customer.class, cList.getCurrentSize());
-        System.arraycopy(cList.toArray(), 0, custs, 0, cList.getCurrentSize());
+
+
     }
 
     public Customer newCustomer(String loc_id, String name, String dob, String gender, String email, String phone_number, String password) {
@@ -34,16 +29,16 @@ public class CustomerDirectory {
         return customer;
     }
 
-    /*public Customer findCustomer(String id) {
-
-        for(Customer cust : customerList.toArray()) {
-
+    public Customer findCustomer(String id) {
+        Customer[] custs = bagToArray();
+        for(Customer cust : custs) {
             if (cust.isMatch(id)) {
                 return cust;
             }
         }
         return null; //not found after going through the whole list
-    }*/
+    }
+
      /*public String[] getList() {
         String[] hospName = new String[hospitallist.size()];
         ArrayList<String> hosps = new ArrayList<String>();
@@ -58,7 +53,7 @@ public class CustomerDirectory {
     }*/
     
     public Customer findCustomerByEmail(String email) {
-
+        Customer[] custs = bagToArray();
         for (Customer p : custs) {
             System.out.println(p.toString()+" = "+ p.getEmail()+ " = "+ email);  
             if (p.getEmail()== null ? email == null : p.getEmail().equals(email)) {
@@ -67,5 +62,23 @@ public class CustomerDirectory {
         }
         return null; //not found after going through the whole list
     }
+   
+        public Customer findCustomerByPhone(String phone) {
+        Customer[] custs = bagToArray();
+        for (Customer p : custs) {
+            System.out.println(p.toString()+" = "+ p.getPhone_number()+ " = "+ phone);  
+            if (p.getPhone_number()== null ? phone == null : p.getEmail().equals(phone)) {
+                return p;
+            }
+        }
+        return null; //not found after going through the whole list
+    }
+
+    private Customer[] bagToArray(){
+        Customer[] custs =(Customer[]) java.lang.reflect.Array.newInstance(Customer.class, customerList.getCurrentSize());
+        System.arraycopy(customerList.toArray(), 0, custs, 0, customerList.getCurrentSize());
+        return custs;
+    }    
+        
 
 }

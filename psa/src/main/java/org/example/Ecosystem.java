@@ -29,4 +29,12 @@ public class Ecosystem {
         //managerDirectory = new ManagerDirectory();
         dPDirectory = new DPDirectory(DBConn.getDPFromDB(this.conn));   
     }
+    
+    public void refreshCustomers(){
+        customerDirectory.customerList = DBConn.getCustomersFromDB(this.conn);
+    }
+    public void refreshDPs(){
+        dPDirectory.dpList = DBConn.getDPFromDB(this.conn);
+    }
+
     }

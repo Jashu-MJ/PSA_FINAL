@@ -5,10 +5,11 @@ package org.example.dsa;
  * A class of bags whose entries are stored in a fixed-size array.
  */
 
-public class ArrayBag<T> implements BagInterface<T> {
+public class ArrayBag<E> implements BagInterface<E> {
 
 
-    private final T[] bag;
+
+    private final E[] bag;
     private int numberOfEntries;
     private static final int DEFAULT_CAPACITY = 25;
     
@@ -29,7 +30,7 @@ public class ArrayBag<T> implements BagInterface<T> {
 
             // The cast is safe because the new array contains null entries.
             @SuppressWarnings("unchecked")
-            T[] tempBag = (T[]) new Object[desiredCapacity]; // Unchecked cast
+            E[] tempBag = (E[]) new Object[desiredCapacity]; // Unchecked cast
             bag = tempBag;
             numberOfEntries = 0;
             initialized = true;
@@ -44,7 +45,7 @@ public class ArrayBag<T> implements BagInterface<T> {
      * @param newEntry The object to be added as a new entry.
      * @return True if the addition is successful, or false if not. 
      */
-    public boolean add(T newEntry) {
+    public boolean add(E newEntry) {
         checkInitialization();
         boolean result = true;
         if (isArrayFull()) {
@@ -68,11 +69,12 @@ public class ArrayBag<T> implements BagInterface<T> {
      * @return A newly allocated array of all the entries in the bag. 
      */
 
-    public final T[] toArray() {
+    public final E[] toArray() {
+
 
         // the cast is safe because the new array contains null entries
         @SuppressWarnings("unchecked")
-        T[] result = (T[]) new Object[numberOfEntries]; // unchecked cast
+        E[] result = (E[]) new Object[numberOfEntries]; // unchecked cast
         for (int index = 0; index < numberOfEntries; index++) {
             result[index] = bag[index];
         } // end for
@@ -112,7 +114,7 @@ public class ArrayBag<T> implements BagInterface<T> {
      * @param anEntry The entry to be counted.
      * @return The number of times anEntry appears in the bag. 
      */
-    public int getFrequencyOf(T anEntry) {
+    public int getFrequencyOf(E anEntry) {
         checkInitialization();
         int counter = 0;
         for (int index = 0; index < numberOfEntries; index++) {
@@ -127,7 +129,7 @@ public class ArrayBag<T> implements BagInterface<T> {
      * @param anEntry The entry to locate.
      * @return True if the bag contains anEntry, or false if not. 
      */
-    public boolean contains(T anEntry) {
+    public boolean contains(E anEntry) {
         checkInitialization();
         return getIndexOf(anEntry) > -1;
     } // end contains
@@ -142,9 +144,9 @@ public class ArrayBag<T> implements BagInterface<T> {
     /** Removes one unspecified entry from this bag, if possible.
      * @return Either the removed entry, if the removal was successful, or null if otherwise. 
      */
-    public T remove() {
+    public E remove() {
         checkInitialization();
-        T result = removeEntry(numberOfEntries - 1);
+        E result = removeEntry(numberOfEntries - 1);
 
         return result;
     } // end remove
@@ -153,10 +155,10 @@ public class ArrayBag<T> implements BagInterface<T> {
      * @param anEntry The entry to be removed.
      * @return True if the removal was successful, or false if not. 
      */
-    public boolean remove(T anEntry) {
+    public boolean remove(E anEntry) {
         checkInitialization();
         int index = getIndexOf(anEntry);
-        T result = removeEntry(index);
+        E result = removeEntry(index);
         return anEntry.equals(result);
     } // end remove
 
@@ -165,8 +167,8 @@ public class ArrayBag<T> implements BagInterface<T> {
      * Preconditions: 0 <= givenIndex < numberOfEntries;
      *                  checkInitialization has been called.
      */
-    private T removeEntry(int givenIndex) {
-        T result = null;
+    private E removeEntry(int givenIndex) {
+        E result = null;
         if (!isEmpty() && (givenIndex >= 0)) {
             result = bag[givenIndex];                   // entry to remove
             bag[givenIndex] = bag[numberOfEntries - 1]; // Replace entry with last entry
@@ -180,7 +182,7 @@ public class ArrayBag<T> implements BagInterface<T> {
      * Returns the index of the entry, if located, or -1 otherwise.
      * Precondition: checkInitialization has been called.
      */
-    private int getIndexOf(T anEntry) {
+    private int getIndexOf(E anEntry) {
         int where = -1;
         boolean stillLooking = true;
         int index = 0;

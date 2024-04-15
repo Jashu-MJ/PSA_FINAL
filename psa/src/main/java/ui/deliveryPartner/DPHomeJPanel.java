@@ -6,6 +6,8 @@ package ui.deliveryPartner;
 
 import javax.swing.JPanel;
 import org.example.Ecosystem;
+import org.example.persona.DelPartner;
+
 
 /**
  *
@@ -15,12 +17,14 @@ public class DPHomeJPanel extends javax.swing.JPanel {
 
     Ecosystem es;
     javax.swing.JPanel CardSequencePanel;
+    DelPartner dp;
     /**
      * Creates new form DPHomeJPanel
      */
-    public DPHomeJPanel(Ecosystem eco, JPanel clp) {
+    public DPHomeJPanel(Ecosystem eco, JPanel clp, DelPartner dp) {
         this.es=es;
         this.CardSequencePanel = clp;
+        this.dp = dp;
         initComponents();
     }
 

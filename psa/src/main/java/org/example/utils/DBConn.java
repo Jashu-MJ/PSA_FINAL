@@ -23,7 +23,7 @@ import ui.WorkAreaMainFrame;
  */
 public class DBConn {
     
-    public static Connection establishConnection() {
+    public static final Connection establishConnection() {
        Connection con = null;
         try{
            String DB_URL =
@@ -94,7 +94,8 @@ public class DBConn {
           return testBag;
     }
     
-     public static ArrayBag<DelPartner> getDPFromDB(Connection con) {
+    public static ArrayBag<DelPartner> getDPFromDB(Connection con) {
+
     
     ArrayBag<DelPartner> testBag = new ArrayBag<DelPartner>();
     try {
