@@ -14,22 +14,23 @@ import org.example.persona.DelPartner;
  */
 public class Utils {
     
-    public static boolean authenticateUser(Ecosystem es, String userType, String username, String password){
+    public static boolean authenticateUser(Ecosystem es, String userType, Object user, String password){
         if("customer".equals(userType.toLowerCase())){
-            Customer customer = es.getCustomerDirectory().findCustomerByEmail(username);
             //System.out.print(customer.toString());
+            Customer customer = (Customer) user;
             if(customer == null || !customer.getPassword().equals(password)){
                 return false;
             }
             System.out.print(customer.toString());
         }
         else if("manager".equals(userType.toLowerCase())){
+            String username = (String) user;
             if(!("ManagerAdmin".equals(username) && "password".equals(password))){
                 return false;
             }
         }
         else if("dp".equals(userType.toLowerCase())){
-            DelPartner dp = es.getDPDirectory().findDPByEmail(username);
+            DelPartner dp = (DelPartner) user;
             if(dp == null || !dp.getPassword().equals(password)){
                 return false;
             }

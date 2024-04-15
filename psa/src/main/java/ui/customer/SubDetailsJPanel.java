@@ -4,18 +4,55 @@
  */
 package ui.customer;
 
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.example.Ecosystem;
+import org.example.persona.Customer;
+
 /**
  *
  * @author marri
  */
 public class SubDetailsJPanel extends javax.swing.JPanel {
 
+    
+    Ecosystem es;
+    javax.swing.JPanel CardSequencePanel;
+    Customer cust;
     /**
      * Creates new form SubDetailsJPanel
      */
-    public SubDetailsJPanel() {
+    public SubDetailsJPanel(Ecosystem es, JPanel clp, Customer cust) {
+        this.es=es;
+        this.CardSequencePanel = clp;        
+        this. cust = cust;
         initComponents();
+        //refreshSubDetailsTable();
     }
+
+//        void refreshSubDetailsTable() {
+////clear supplier table
+//        int rc = tblDetails.getRowCount();
+//        int i;
+//        for (i = rc - 1; i >= 0; i--) {
+//            ((DefaultTableModel) tblDetails.getModel()).removeRow(i);
+//        }
+//        ArrayList<MealOrder> mealOrders = es.get().getMealOrderlist();
+//
+//        for (MealOrder mealOrder : mealOrders) {
+//            Object[] row = new Object[7];
+//            row[0] = mealOrder; //.getAssociatedPersonProfile().getPerson().getName();
+//            row[1] = mealOrder.getPp();
+//            row[2] = mealOrder.getDp();
+//            row[3] = mealOrder.getPp().getDietaryChoice();
+//            row[4] = mealOrder.getStartDate();
+//            row[5] = mealOrder.getPeriod() + " Weeks";
+//            row[6] = mealOrder.isIsActive();
+//            ((DefaultTableModel) tblMealOrders.getModel()).addRow(row);
+//        }
+//        selectedMealorder = null;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,6 +65,8 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
 
         btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDetails = new javax.swing.JTable();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -40,6 +79,19 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Subscription Plan Details");
 
+        tblDetails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Sub ID","Sub Type", "Price", "Start Date", "End Date", "Meals left" }
+        ));
+        tblDetails.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tblDetails);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -51,6 +103,11 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(93, 93, 93)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(94, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -60,16 +117,25 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 353, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addGap(65, 65, 65))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(141, 141, 141)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(141, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel); 
     }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblDetails;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,6 +17,7 @@ import org.example.ConfigureSystem;
 import org.example.Ecosystem;
 import org.example.persona.Customer;
 import org.example.dsa.ArrayBag;
+import org.example.persona.DelPartner;
 import org.example.utils.DBConn;
 import org.example.utils.Utils;
 import ui.customer.CustomerHomeJPanel;
@@ -96,7 +97,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
             }
         });
 
-        ddUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Manager", "Del Partner"}));
+        ddUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Del Partner"}));
         ddUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ddUserActionPerformed(evt);
@@ -120,7 +121,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                     .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,39 +169,39 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         Connection conn = DBConn.establishConnection();
 
         if ("Customer".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
-            
-            if (!(Utils.authenticateUser(es,"customer", un, pw))) {
+            Customer customer = es.getCustomerDirectory().findCustomerByEmail(un);
+
+            if (customer == null || !(Utils.authenticateUser(es,"customer", customer, pw))) {
             JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
             return;
         }
-            CustomerHomeJPanel customerHomeJPanel = new CustomerHomeJPanel(es, CardSequencePanel);
-            CardSequencePanel.removeAll();
+            CustomerHomeJPanel customerHomeJPanel = new CustomerHomeJPanel(es, CardSequencePanel, customer);
+            //CardSequencePanel.removeAll();
             CardSequencePanel.add("customer", customerHomeJPanel);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
-        if ("Manager".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
-                    
+        else if ("Del Partner".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
+            DelPartner dp = es.getDPDirectory().findDPByEmail(un);
+            if(dp == null || !(Utils.authenticateUser(es,"dp", dp, pw))) {
+            JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
+            return;
+        }
+            DPHomeJPanel dPHomeJPanel = new DPHomeJPanel(es, CardSequencePanel, dp);
+            //CardSequencePanel.removeAll();
+            CardSequencePanel.add("Dp", dPHomeJPanel);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        }
+        //if ("Manager".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
+        else{            
             if(!(Utils.authenticateUser(es, "manager", un, pw))) {
             JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
             return;
         }
             ManagerJPanel managerJPanel = new ManagerJPanel(es, CardSequencePanel);
-            CardSequencePanel.removeAll();
+            //CardSequencePanel.removeAll();
             CardSequencePanel.add("Manager", managerJPanel);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
-        if ("Del Partner".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
-                    
-            if(!(Utils.authenticateUser(es,"dp", un, pw))) {
-            JOptionPane.showMessageDialog(this, "Username or password is incorrect or User doesn't exists");
-            return;
-        }
-            DPHomeJPanel dPHomeJPanel = new DPHomeJPanel(es, CardSequencePanel);
-            CardSequencePanel.removeAll();
-            CardSequencePanel.add("Dp", dPHomeJPanel);
-            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        }
-
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -211,11 +211,19 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
 
     private void btnSignupLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupLoginButtonActionPerformed
 
-        // TODO add your handling code here:
-//        SignupJPanel signupJPanel = new SignupJPanel(business, CardSequencePanel);
-//        CardSequencePanel.removeAll();
-//        CardSequencePanel.add("SignUp", signupJPanel);
-
+    if ("Customer".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())){
+        SignUpCustomerJPanel signupJPanel = new SignUpCustomerJPanel(es, CardSequencePanel);
+        //CardSequencePanel.removeAll();
+        CardSequencePanel.add("SignUpCustomer", signupJPanel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }
+    if ("Del Partner".toLowerCase().equals((ddUser.getSelectedItem()).toString().toLowerCase())) {
+        
+        SignUpDPJPanel signupJPanel = new SignUpDPJPanel(es, CardSequencePanel);
+        //CardSequencePanel.removeAll();
+        CardSequencePanel.add("SignUpDP", signupJPanel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }
     }//GEN-LAST:event_btnSignupLoginButtonActionPerformed
 
     private void ddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddUserActionPerformed
@@ -226,8 +234,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -249,6 +255,5 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtUsername;
-
     // End of variables declaration//GEN-END:variables
 }

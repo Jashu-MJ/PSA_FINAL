@@ -28,7 +28,12 @@ public class DelPartner {
         }
         return false;
     }
-
+    public boolean isEmailMatch(String email) {
+        if(getEmail().equals(email)) {
+            return true;
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return getId();
