@@ -95,6 +95,7 @@ public class DBConn {
     }
     
     public static ArrayBag<DelPartner> getDPFromDB(Connection con) {
+
     
     ArrayBag<DelPartner> testBag = new ArrayBag<DelPartner>();
     try {

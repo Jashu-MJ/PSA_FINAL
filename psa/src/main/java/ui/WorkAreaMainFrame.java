@@ -121,6 +121,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                     .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +225,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         CardSequencePanel.add("SignUpDP", signupJPanel);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }
+
     }//GEN-LAST:event_btnSignupLoginButtonActionPerformed
 
     private void ddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddUserActionPerformed
@@ -255,5 +257,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtUsername;
+
     // End of variables declaration//GEN-END:variables
 }

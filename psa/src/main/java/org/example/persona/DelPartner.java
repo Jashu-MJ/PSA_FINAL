@@ -34,6 +34,7 @@ public class DelPartner {
         }
         return false;
     }
+
     @Override
     public String toString() {
         return getId();

@@ -123,6 +123,7 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnSignup">
+
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sign Up"/>
               </Properties>
@@ -148,6 +149,7 @@
                 <Property name="text" type="java.lang.String" value="username"/>
               </Properties>
             </Component>
+
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="CardSequencePanel">

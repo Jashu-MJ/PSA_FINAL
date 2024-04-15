@@ -18,6 +18,7 @@ public class Utils {
         if("customer".equals(userType.toLowerCase())){
             //System.out.print(customer.toString());
             Customer customer = (Customer) user;
+
             if(customer == null || !customer.getPassword().equals(password)){
                 return false;
             }
@@ -25,12 +26,14 @@ public class Utils {
         }
         else if("manager".equals(userType.toLowerCase())){
             String username = (String) user;
+
             if(!("ManagerAdmin".equals(username) && "password".equals(password))){
                 return false;
             }
         }
         else if("dp".equals(userType.toLowerCase())){
             DelPartner dp = (DelPartner) user;
+
             if(dp == null || !dp.getPassword().equals(password)){
                 return false;
             }

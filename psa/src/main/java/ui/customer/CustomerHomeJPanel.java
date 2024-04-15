@@ -9,6 +9,7 @@ import org.example.Ecosystem;
 import org.example.persona.Customer;
 
 
+
 /**
  *
  * @author marri
@@ -18,6 +19,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
     Ecosystem es;
     javax.swing.JPanel CardSequencePanel;
     Customer cust;
+
     /**
      * Creates new form CustomerHomeJPanel
      * @param es
@@ -87,7 +89,6 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
         btnMealStatus.setText("Meal Status");
         add(btnMealStatus);
         btnMealStatus.setBounds(290, 240, 154, 38);
-
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +97,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
         });
         add(btnLogout);
         btnLogout.setBounds(300, 350, 105, 23);
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeActionPerformed
@@ -122,6 +124,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
           CardSequencePanel.add("subPlan", subDetailsJPanel);
          ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnSubDetailsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBook;

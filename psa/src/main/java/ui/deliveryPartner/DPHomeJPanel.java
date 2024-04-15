@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import org.example.Ecosystem;
 import org.example.persona.DelPartner;
 
+
 /**
  *
  * @author marri

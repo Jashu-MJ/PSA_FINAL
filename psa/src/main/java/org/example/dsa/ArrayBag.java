@@ -8,6 +8,7 @@ package org.example.dsa;
 public class ArrayBag<E> implements BagInterface<E> {
 
 
+
     private final E[] bag;
     private int numberOfEntries;
     private static final int DEFAULT_CAPACITY = 25;
@@ -69,6 +70,7 @@ public class ArrayBag<E> implements BagInterface<E> {
      */
 
     public final E[] toArray() {
+
 
         // the cast is safe because the new array contains null entries
         @SuppressWarnings("unchecked")

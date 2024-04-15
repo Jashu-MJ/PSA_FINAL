@@ -19,6 +19,7 @@ public class CustomerDirectory {
     public CustomerDirectory(ArrayBag<Customer> cList) {
         customerList = cList;
 
+
     }
 
     public Customer newCustomer(String loc_id, String name, String dob, String gender, String email, String phone_number, String password) {
@@ -37,6 +38,7 @@ public class CustomerDirectory {
         }
         return null; //not found after going through the whole list
     }
+
      /*public String[] getList() {
         String[] hospName = new String[hospitallist.size()];
         ArrayList<String> hosps = new ArrayList<String>();
@@ -78,4 +80,5 @@ public class CustomerDirectory {
         return custs;
     }    
         
+
 }
