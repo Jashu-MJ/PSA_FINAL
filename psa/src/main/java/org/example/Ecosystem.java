@@ -18,7 +18,7 @@ import org.example.utils.DBConn;
 public class Ecosystem {   
     String name;
     CustomerDirectory customerDirectory;
-    //ManagerDirectory managerDirectory;
+    SubDetailsDirectory subDetailsDirectory;
     DPDirectory dPDirectory;
     LocationDirectory locDirectory;
     BookingDirectory bookingDirectory;
@@ -32,6 +32,7 @@ public class Ecosystem {
         dPDirectory = new DPDirectory(DBConn.getDPFromDB(this.conn));
         locDirectory = new LocationDirectory(DBConn.getLocFromDB(this.conn));
         bookingDirectory = new BookingDirectory(DBConn.getBookFromDB(this.conn));
+        subDetailsDirectory = new SubDetailsDirectory(DBConn.getSubDetailsFromDB(this.conn));
     }
     
     public void refreshCustomers(){
@@ -40,5 +41,7 @@ public class Ecosystem {
     public void refreshDPs(){
         dPDirectory.dpList = DBConn.getDPFromDB(this.conn);
     }
-
+    public void refreshSubDetails(){
+        subDetailsDirectory.subDetailsList = DBConn.getSubDetailsFromDB(this.conn);
+    }
     }
