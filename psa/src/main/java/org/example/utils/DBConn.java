@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import org.example.dsa.ArrayBag;
 import org.example.persona.Customer;
 import org.example.persona.DelPartner;
+import org.example.persona.SubDetails;
 import ui.WorkAreaMainFrame;
 
 /**
@@ -96,7 +97,6 @@ public class DBConn {
     
     public static ArrayBag<DelPartner> getDPFromDB(Connection con) {
 
-    
     ArrayBag<DelPartner> testBag = new ArrayBag<DelPartner>();
     try {
       String currentDir = System.getProperty("user.dir");
@@ -131,4 +131,43 @@ public class DBConn {
     }
           return testBag;
     }
+    
+    
+    public static ArrayBag<SubDetails> getSubDetailsFromDB(Connection con) {
+
+    ArrayBag<SubDetails> testBag = new ArrayBag<SubDetails>();
+    try {
+      String currentDir = System.getProperty("user.dir");
+      System.out.println("Current dir using System:" + currentDir);
+      
+      // Step 3: Create a statement object
+      Statement stmt = con.createStatement();
+
+      // Step 4: Execute the query
+      ResultSet rs = stmt.executeQuery("SELECT s.sub_id,s.c_id,st.type,st.price,s.start_date,s.end_date,s.no_of_meals_left FROM subscription s join SUBSCRIPTION_TYPE st on s.sub_type_id=st.sub_type_id");
+
+      // Step 5: Process the results
+      while (rs.next()) {
+     
+        System.out.println(
+            rs.getInt(1)
+                + "  "
+                + rs.getString(2)
+                + "  "
+                + rs.getString(3)
+                + "  "
+                + rs.getString(4)
+                + "  "
+                + rs.getString(5));
+      
+         testBag.add(new SubDetails(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getDate(6),rs.getString(7)));
+      }
+      // Step 6: Close the connection
+      //con.close();
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+          return testBag;
+    }
+    
 }

@@ -1,3 +1,5 @@
 
-f	java:S116"QRename this field "loc_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ρϋΰ
-l	java:S116"WRename this field "phone_number" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ι΅“σ
+	java:S116"QRename this field "loc_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ρϋΰJ$c30ce9a4-35fc-4298-a145-f4a49cc9e2b7
+’	java:S116"WRename this field "phone_number" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ι΅“σJ$8845cd18-26e0-4b37-95f4-2fd114947a1f
+„
+java:S1126"AReplace this if-then-else statement by a single return statement.(Φ®χή8¤τ‹ ξ1J$1bca3f74-2348-487b-8278-28a8fce75f21
