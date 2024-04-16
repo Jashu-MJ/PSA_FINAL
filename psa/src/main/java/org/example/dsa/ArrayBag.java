@@ -211,5 +211,26 @@ public class ArrayBag<E> implements BagInterface<E> {
         result += "]";
         return result;
     } // end toString
+    
+    
+    /**
+ * Sets the entry at a specific index in the bag to a new entry.
+ * @param index The index at which to set the new entry.
+ * @param newEntry The new entry to set at the specified index.
+ * @return True if the update was successful, or false if the index is invalid.
+ */
+public boolean set(int index, E newEntry) {
+    checkInitialization();
+    
+    // Check if the index is within the bounds of the array
+    if (index >= 0 && index < numberOfEntries) {
+        // Update the entry at the specified index
+        bag[index] = newEntry;
+        return true;
+    } else {
+        // Return false if the index is invalid
+        return false;
+    }
+}
 
 } // end ArrayBag

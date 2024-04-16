@@ -12,6 +12,15 @@ public class Main {
     // Press Alt+Enter with your caret at the highlighted text to see how
     // IntelliJ IDEA suggests fixing it.
     System.out.printf("Hello and welcome!");
+    
+//    // Create a booking directory
+//        BookingDirectory bookingDirectory = new BookingDirectory();
+//
+//        // Generate sample bookings
+//        bookingDirectory.generateSampleBookings();
+//
+//        // Display all bookings
+//        bookingDirectory.displayAllBookings();
 
     // Press Shift+F10 or click the green arrow button in the gutter to run the code.
     for (int i = 1; i <= 5; i++) {
@@ -65,6 +74,8 @@ public class Main {
 
       // Step 6: Close the connection
       con.close();
+      
+      
     } catch (Exception e) {
       System.out.println(e);
     }

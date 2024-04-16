@@ -5,8 +5,15 @@
 package ui.deliveryPartner;
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.example.BookingDirectory;
 import org.example.Ecosystem;
 import org.example.persona.DelPartner;
+import org.example.dsa.DoublyLinkedListPriorityQueue;
+import org.example.persona.Booking;
+import org.example.persona.Customer;
+import org.example.persona.Location;
+import org.example.utils.DBConn;
 
 
 /**
@@ -18,14 +25,17 @@ public class DPHomeJPanel extends javax.swing.JPanel {
     Ecosystem es;
     javax.swing.JPanel CardSequencePanel;
     DelPartner dp;
+    BookingDirectory bookingDirectory;
     /**
      * Creates new form DPHomeJPanel
      */
     public DPHomeJPanel(Ecosystem eco, JPanel clp, DelPartner dp) {
-        this.es=es;
+        this.es=eco;
         this.CardSequencePanel = clp;
         this.dp = dp;
+        this.bookingDirectory = es.getBookingDirectory();
         initComponents();
+        populateDPTable();
     }
 
     /**
@@ -42,6 +52,8 @@ public class DPHomeJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -68,32 +80,50 @@ public class DPHomeJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Delivered");
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Scheduled Deliveries");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y", "N" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Delivery Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(109, 109, 109))
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(56, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(jButton2)
+                        .addGap(109, 109, 109))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,11 +137,14 @@ public class DPHomeJPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(86, 86, 86))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -121,13 +154,115 @@ public class DPHomeJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+            // Get the selected booking from the table
+    int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow == -1) {
+        // No booking selected
+        javax.swing.JOptionPane.showMessageDialog(this, "Please select a booking to update the Delivery Status.");
+        return;
+    }
+
+    // Get the booking ID from the selected row
+    String bookingID = jTable1.getValueAt(selectedRow, 0).toString();
+
+    // Get the selected delivery partner from jComboBox2
+    String deliveryStatus = jComboBox1.getSelectedItem().toString();
+
+    // Find the booking with the booking ID
+    Booking booking = bookingDirectory.getBookingById(bookingID);
+
+    if (booking != null) {
+        // Assign the selected delivery partner to the booking
+        booking.setIsDelivered(deliveryStatus);
+
+        // Update the booking directory
+        bookingDirectory.updateBooking(booking);
+        DBConn.updateDeliveryStatus(DBConn.establishConnection(), bookingID, deliveryStatus);
+        
+
+        // Show a confirmation message
+        javax.swing.JOptionPane.showMessageDialog(this, "Delivery Status has been updated successfully.");
+
+        // Refresh the booking table
+        populateDPTable();
+    } else {
+        // Booking not found
+        javax.swing.JOptionPane.showMessageDialog(this, "Booking not found.");
+    }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+
+private void populateDPTable() {
+// Initialize the DoublyLinkedListPriorityQueue for Booking objects
+    DoublyLinkedListPriorityQueue<Booking> priorityQueue = new DoublyLinkedListPriorityQueue<>();
+    jLabel3.setText("Scheduled Deliveries For "+dp.getName());
+    
+
+    // Add all bookings from BookingDirectory to the priority queue
+    if (bookingDirectory != null && bookingDirectory.getBookingList() != null) {
+        for (Booking booking : bookingDirectory.getBookingList()) {
+            if(booking.getDeliveryPersonId().equals(dp.getId())){
+                priorityQueue.add(booking);
+            }
+            
+        }
+        
+    }
+       
+
+    // Define columns for the table model
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Booking ID");
+    model.addColumn("Customer Name");
+    model.addColumn("Customer Phone");
+    model.addColumn("Customer Address");
+    model.addColumn("Meal ID");
+    model.addColumn("Date of Delivery");
+    model.addColumn("Time Slot");
+    model.addColumn("Is Delivered");
+
+    // Iterate through the priority queue and add rows to the model
+    while (!priorityQueue.isEmpty()) {
+        Booking booking = priorityQueue.remove();
+        Customer c = es.getCustomerDirectory().findCustomer(booking.getCustomerId());
+        Location cLoc = es.getLocDirectory().findLocationById(c.getLoc_id());
+        String cAddr = cLoc.getStreetAddress() +", "+ cLoc.getCity() +", "+ cLoc.getState() +", "+ cLoc.getZipcode();
+        model.addRow(new Object[]{
+            booking.getBookId(),
+            c.getName(),
+            c.getPhone_number(),
+            cAddr,
+            booking.getMealId(),
+            booking.getDateOfDelivery(),
+            booking.getTimeSlot(),
+            booking.isDelivered()
+        });
+    }
+
+    // Set the model for the jTable1
+    jTable1.setModel(model);
+    }
+
+
+
+
 }
