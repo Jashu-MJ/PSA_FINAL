@@ -101,7 +101,6 @@ public class SubscribePlanJPanel extends javax.swing.JPanel {
         });
         add(txtMealCount);
         txtMealCount.setBounds(250, 240, 150, 30);
-
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPriceActionPerformed(evt);
@@ -109,7 +108,6 @@ public class SubscribePlanJPanel extends javax.swing.JPanel {
         });
         add(txtPrice);
         txtPrice.setBounds(250, 180, 150, 30);
-
         btnSubscribe.setText("Subscribe to plan");
         btnSubscribe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +116,6 @@ public class SubscribePlanJPanel extends javax.swing.JPanel {
         });
         add(btnSubscribe);
         btnSubscribe.setBounds(200, 350, 190, 30);
-
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +129,7 @@ public class SubscribePlanJPanel extends javax.swing.JPanel {
     private void btnSubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeActionPerformed
         
         Connection conn = DBConn.establishConnection();
+
         try {
             CallableStatement callableStatement = conn.prepareCall("{call PurchaseSubscription(?,?,?)}");
             callableStatement.setInt(1, Integer.parseInt(cust.getId()));

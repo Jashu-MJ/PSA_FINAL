@@ -18,6 +18,7 @@ public class CustomerDirectory {
 
     public CustomerDirectory(ArrayBag<Customer> cList) {
         customerList = cList;
+
     }
 
     public Customer newCustomer(String loc_id, String name, String dob, String gender, String email, String phone_number, String password) {

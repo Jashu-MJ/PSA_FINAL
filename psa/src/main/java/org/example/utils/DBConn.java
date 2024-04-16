@@ -96,7 +96,7 @@ public class DBConn {
     }
     
     public static ArrayBag<DelPartner> getDPFromDB(Connection con) {
-        
+
     ArrayBag<DelPartner> testBag = new ArrayBag<DelPartner>();
     try {
       String currentDir = System.getProperty("user.dir");

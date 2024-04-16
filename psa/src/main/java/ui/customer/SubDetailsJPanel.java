@@ -14,6 +14,7 @@ import static org.example.dsa.MergeSort.mergeSort;
 import org.example.persona.Customer;
 import org.example.persona.SubDetails;
 
+
 /**
  *
  * @author marri
@@ -60,7 +61,31 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
             }
             selectedSubDetail = null;
         }
+
     }
+
+//        void refreshSubDetailsTable() {
+////clear supplier table
+//        int rc = tblDetails.getRowCount();
+//        int i;
+//        for (i = rc - 1; i >= 0; i--) {
+//            ((DefaultTableModel) tblDetails.getModel()).removeRow(i);
+//        }
+//        ArrayList<MealOrder> mealOrders = es.get().getMealOrderlist();
+//
+//        for (MealOrder mealOrder : mealOrders) {
+//            Object[] row = new Object[7];
+//            row[0] = mealOrder; //.getAssociatedPersonProfile().getPerson().getName();
+//            row[1] = mealOrder.getPp();
+//            row[2] = mealOrder.getDp();
+//            row[3] = mealOrder.getPp().getDietaryChoice();
+//            row[4] = mealOrder.getStartDate();
+//            row[5] = mealOrder.getPeriod() + " Weeks";
+//            row[6] = mealOrder.isIsActive();
+//            ((DefaultTableModel) tblMealOrders.getModel()).addRow(row);
+//        }
+//        selectedMealorder = null;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,8 +100,8 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
-
         setLayout(null);
+
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +135,6 @@ public class SubDetailsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblDetails);
-
         add(jScrollPane1);
         jScrollPane1.setBounds(50, 130, 640, 230);
     }// </editor-fold>//GEN-END:initComponents
