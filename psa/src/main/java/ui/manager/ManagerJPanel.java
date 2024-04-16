@@ -12,6 +12,7 @@ import org.example.DPDirectory;
 import org.example.Ecosystem;
 import org.example.dsa.DoublyLinkedListPriorityQueue;
 import org.example.persona.Booking;
+import org.example.utils.DBConn;
 
 
 
@@ -171,6 +172,8 @@ public class ManagerJPanel extends javax.swing.JPanel {
 
         // Update the booking directory
         bookingDirectory.updateBooking(booking);
+        DBConn.updateDeliveryPerson(DBConn.establishConnection(), bookingID, deliveryPartnerID);
+        
 
         // Show a confirmation message
         javax.swing.JOptionPane.showMessageDialog(this, "Delivery partner assigned successfully.");

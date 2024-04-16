@@ -16,6 +16,7 @@ import org.example.dsa.ArrayBag;
 import org.example.persona.Booking;
 
 
+
 public class BookingDirectory {
     private ArrayBag<Booking> bookingList; // List to store bookings
     private Booking[] book; // Array to store bookings
@@ -131,7 +132,7 @@ public class BookingDirectory {
             Booking existingBooking = book[i];
             if (existingBooking.getBookId().equals(updatedBooking.getBookId())) {
                 book[i] = updatedBooking; // Update the booking in the array
-                bookingList.set(i, updatedBooking); // Update the booking in the ArrayBag
+                bookingList.set(i, updatedBooking); // Update the booking in the ArrayBag                
                 return; // Stop the loop once the booking is updated
             }
         }

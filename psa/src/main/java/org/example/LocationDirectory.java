@@ -35,9 +35,9 @@ public class LocationDirectory {
     }
 
     // Method to find a location by its LOC_ID
-    public Location findLocationById(int locId) {
-        for (Location location : locationBag.toArray()) {
-            if (location.getLocId() == locId) {
+    public Location findLocationById(String locId) {
+        for (Location location : locs) {
+            if (location.getLocId().equals(locId)) {
                 return location;
             }
         }
@@ -46,13 +46,13 @@ public class LocationDirectory {
 
     // Method to get all locations as a list
     public Location[] getAllLocations() {
-        return locationBag.toArray();
+        return locs;
     }
 
     // Method to remove a location by its LOC_ID
-    public void removeLocationById(int locId) {
+    public void removeLocationById(String locId) {
         for (Location location : locationBag.toArray()) {
-            if (location.getLocId() == locId) {
+            if (location.getLocId().equals(locId)) {
                 locationBag.remove(location);
                 break;
             }

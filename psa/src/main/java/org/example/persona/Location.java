@@ -7,11 +7,11 @@ package org.example.persona;
 
 public class Location {
     
-    private int locId;
+    private String locId;
     private String streetAddress;
     private String city;
     private String state;
-    private int zipcode;
+    private String zipcode;
 
     // Default constructor
     public Location() {
@@ -19,7 +19,7 @@ public class Location {
     }
 
     // Parameterized constructor
-    public Location(int locId, String streetAddress, String city, String state, int zipcode) {
+    public Location(String locId, String streetAddress, String city, String state, String zipcode) {
         this.locId = locId;
         this.streetAddress = streetAddress;
         this.city = city;
@@ -30,11 +30,11 @@ public class Location {
     // Getter and setter methods for each field
 
     // LOC_ID
-    public int getLocId() {
+    public String getLocId() {
         return locId;
     }
 
-    public void setLocId(int locId) {
+    public void setLocId(String locId) {
         this.locId = locId;
     }
 
@@ -66,11 +66,11 @@ public class Location {
     }
 
     // ZIPCODE
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
