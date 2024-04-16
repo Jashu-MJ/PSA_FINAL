@@ -121,6 +121,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         SubDetailsJPanel subDetailsJPanel = new SubDetailsJPanel(es, CardSequencePanel, cust);
           //CardSequencePanel.removeAll();
+          subDetailsJPanel.refreshSubDetailsTable();
           CardSequencePanel.add("subPlan", subDetailsJPanel);
          ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnSubDetailsActionPerformed
