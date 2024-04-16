@@ -5,8 +5,14 @@
 package ui.deliveryPartner;
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.example.BookingDirectory;
 import org.example.Ecosystem;
 import org.example.persona.DelPartner;
+import org.example.dsa.DoublyLinkedListPriorityQueue;
+import org.example.persona.Booking;
+import org.example.persona.Customer;
+import org.example.persona.Location;
 
 
 /**
@@ -18,14 +24,17 @@ public class DPHomeJPanel extends javax.swing.JPanel {
     Ecosystem es;
     javax.swing.JPanel CardSequencePanel;
     DelPartner dp;
+    BookingDirectory bookingDirectory;
     /**
      * Creates new form DPHomeJPanel
      */
     public DPHomeJPanel(Ecosystem eco, JPanel clp, DelPartner dp) {
-        this.es=es;
+        this.es=eco;
         this.CardSequencePanel = clp;
         this.dp = dp;
+        this.bookingDirectory = es.getBookingDirectory();
         initComponents();
+        populateDPTable();
     }
 
     /**
@@ -130,4 +139,50 @@ public class DPHomeJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+
+private void populateDPTable() {
+// Initialize the DoublyLinkedListPriorityQueue for Booking objects
+    DoublyLinkedListPriorityQueue<Booking> priorityQueue = new DoublyLinkedListPriorityQueue<>();
+    
+    
+
+    // Add all bookings from BookingDirectory to the priority queue
+    if (bookingDirectory != null && bookingDirectory.getBookingList() != null) {
+        for (Booking booking : bookingDirectory.getBookingList()) {
+            priorityQueue.add(booking);
+        }
+        
+    }
+       
+
+    // Define columns for the table model
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Booking ID");
+    model.addColumn("Customer ID");
+    model.addColumn("Meal ID");
+    model.addColumn("Date of Delivery");
+    model.addColumn("Time Slot");
+    model.addColumn("Is Delivered");
+
+    // Iterate through the priority queue and add rows to the model
+    while (!priorityQueue.isEmpty()) {
+        Booking booking = priorityQueue.remove();
+        model.addRow(new Object[]{
+            booking.getBookId(),
+            booking.getCustomerId(),
+            booking.getMealId(),
+            booking.getDateOfDelivery(),
+            booking.getTimeSlot(),
+            booking.isDelivered()
+        });
+    }
+
+    // Set the model for the jTable1
+    jTable1.setModel(model);
+    }
+
+
+
+
 }

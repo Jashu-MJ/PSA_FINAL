@@ -100,7 +100,8 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
             }
         });
 
-        ddUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Del Partner"}));
+        ddUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Del Partner","Manager"}));
+        ddUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ddUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ddUserActionPerformed(evt);
@@ -124,7 +125,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                     .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,6 +260,5 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtUsername;
-
     // End of variables declaration//GEN-END:variables
 }
