@@ -87,8 +87,14 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
         btnBook.setBounds(40, 240, 170, 38);
 
         btnMealStatus.setText("Meal Status");
+        btnMealStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMealStatusActionPerformed(evt);
+            }
+        });
         add(btnMealStatus);
         btnMealStatus.setBounds(290, 240, 154, 38);
+
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,8 +102,7 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
             }
         });
         add(btnLogout);
-        btnLogout.setBounds(300, 350, 105, 23);
-
+        btnLogout.setBounds(300, 350, 105, 29);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeActionPerformed
@@ -110,6 +115,9 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
 
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
         // TODO add your handling code here:
+BookMealJPanel bookMealJPanel= new BookMealJPanel(es, CardSequencePanel, cust);
+  CardSequencePanel.add("bookMealPlan", bookMealJPanel);
+         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBookActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -125,6 +133,13 @@ public class CustomerHomeJPanel extends javax.swing.JPanel {
           CardSequencePanel.add("subPlan", subDetailsJPanel);
          ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnSubDetailsActionPerformed
+
+    private void btnMealStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMealStatusActionPerformed
+        // TODO add your handling code here:
+            MealStatusJPanel mealStatusJPanel = new MealStatusJPanel(es, CardSequencePanel, cust);
+            CardSequencePanel.add("mealStatus", mealStatusJPanel);
+         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnMealStatusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

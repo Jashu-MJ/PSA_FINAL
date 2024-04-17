@@ -12,13 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.Date;
+import java.util.Random;
 import org.example.dsa.ArrayBag;
 import org.example.persona.Booking;
 
 
 
 public class BookingDirectory {
-    private ArrayBag<Booking> bookingList; // List to store bookings
+     ArrayBag<Booking> bookingList; // List to store bookings
     private Booking[] book; // Array to store bookings
 
     /**
@@ -57,14 +58,17 @@ public class BookingDirectory {
     public Booking newBooking(String customerId, String subscriptionId, String mealId, Date dateOfDelivery,
                               String timeSlot, String deliveryPersonId, String isDelivered) {
         // Generate a unique ID for the new booking
-        String bookId = UUID.randomUUID().toString();
+        Random random = new Random();
+    int bookIdInt = 777001 + random.nextInt(10000);
+    String bookId = String.valueOf(bookIdInt);
 
         // Create a new booking with the provided details
         Booking booking = new Booking(bookId, customerId, subscriptionId, mealId, new Date(), dateOfDelivery,
                                       timeSlot, deliveryPersonId, isDelivered);
 
-        // Add the new booking to the booking list
         bookingList.add(booking);
+        System.out.println(bookingList.toString());
+
         return booking;
     }
 

@@ -325,5 +325,80 @@ public class DBConn {
         System.out.println("Error converting newIsDeliveredStatusStr to char: " + e.getMessage());
     }
 }
+public static void updateSubscriptionMealLeft(Connection con, String subid, String newMealLeft) {
+     try {
+        // Convert the received String bookingId to integer
+        int subId = Integer.parseInt(subid);
+        
+        
+        // Step 3: Create a prepared statement
+        String query = "UPDATE SUBSCRIPTION SET NO_OF_MEALS_LEFT = ? WHERE SUB_ID = ?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        
+        // Step 4: Set parameters for the query
+        pstmt.setString(1, newMealLeft); // Set the new is_delivered status as a char
+        pstmt.setInt(2, subId); // Set booking_id
+        
+        // Step 5: Execute the update
+        int rowsUpdated = pstmt.executeUpdate();
+        
+        // Step 6: Check if the update was successful
+        if (rowsUpdated > 0) {
+            System.out.println("Successfully updated is_delivered for book_id: " + subId);
+        } else {
+            System.out.println("No booking found with book_id: " + subId);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error updating is_delivered: " + e.getMessage());
+    } catch (NumberFormatException e) {
+        System.out.println("Error converting booking_id to int: " + e.getMessage());
+    } catch (StringIndexOutOfBoundsException e) {
+        System.out.println("Error converting newIsDeliveredStatusStr to char: " + e.getMessage());
+    }
+}
+public static void addBooking(Connection con, Booking booking) {
+     try {
+System.out.println("In the insert booking");
+System.out.println("booking"+booking.toString());
+System.out.println("booking book id "+booking.getBookId());
+       String insertQuery = "INSERT INTO BOOKING (BOOK_ID, C_ID, SUB_ID, MEAL_ID, BOOKING_DATE, DATE_OF_DELIVERY, TIME_SLOT, IS_DELIVERED) " +
+                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(insertQuery);
+
+            // Step 4: Set parameters for the insert query
+System.out.println("In the insert booking1");
+            pstmt.setInt(1,Integer.parseInt( booking.getBookId())); 
+System.out.println("In the insert booking2");         // Assuming getBookId() returns an int
+            pstmt.setInt(2,Integer.parseInt(  booking.getCustomerId())); 
+System.out.println("In the insert booking3");            // Assuming getCId() returns an int
+            pstmt.setInt(3, Integer.parseInt( booking.getSubscriptionId())); 
+System.out.println("In the insert booking4");          // Assuming getSubId() returns an int
+            pstmt.setInt(4, Integer.parseInt(booking.getMealId()));  
+System.out.println("In the insert booking5");        // Assuming getMealId() returns an int
+            pstmt.setDate(5, new java.sql.Date(booking.getBookingDate().getTime())); // Converting java.util.Date to java.sql.Date
+            pstmt.setDate(6, booking.getDateOfDelivery() != null ? new java.sql.Date(booking.getDateOfDelivery().getTime()) : null); // Handling potential nulls
+            pstmt.setString(7, booking.getTimeSlot());
+            //pstmt.setInt(8, Integer.parseInt(booking.getDeliveryPersonId()));            // Assuming getDpId() returns an int, handling nullable
+            pstmt.setString(8, booking.isDelivered());  // Assuming getIsDelivered() returns a String representing 'Y' or 'N'
+
+            // Step 5: Execute the insert
+            int rowsInserted = pstmt.executeUpdate();
+
+            // Step 6: Check if the insert was successful
+            if (rowsInserted > 0) {
+                System.out.println("Successfully added a new booking with book_id: " + booking.getBookId());
+                establishConnection();
+            } else {
+                System.out.println("No new booking was added.");
+            }
+    } catch (SQLException e) {
+        System.out.println("Error updating is_delivered: " + e.getMessage());
+    } catch (NumberFormatException e) {
+        System.out.println("Error converting" + e.getMessage());
+    } catch (StringIndexOutOfBoundsException e) {
+        System.out.println("Error converting newIsDeliveredStatusStr to char: " + e.getMessage());
+    }
+}
 
 }

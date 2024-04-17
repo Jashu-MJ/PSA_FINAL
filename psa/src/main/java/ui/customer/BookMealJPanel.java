@@ -4,6 +4,32 @@
  */
 package ui.customer;
 
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import org.example.BookingDirectory;
+import org.example.DPDirectory;
+import org.example.Ecosystem;
+import org.example.SubDetailsDirectory;
+import org.example.persona.Booking;
+import org.example.persona.Customer;
+import org.example.persona.SubDetails;
+import org.example.utils.DBConn;
+import ui.SignUpDPJPanel;
+
 /**
  *
  * @author marri
@@ -13,8 +39,75 @@ public class BookMealJPanel extends javax.swing.JPanel {
     /**
      * Creates new form BookMealJPanel
      */
-    public BookMealJPanel() {
+    Ecosystem es;
+    javax.swing.JPanel CardSequencePanel;
+    Customer cust;
+    SubDetailsDirectory subDetailsDirectory;
+    String numberOfMeals="0";
+    BookingDirectory bookingDirectory;
+    String subscriptionId="";
+    String customerId="";
+    public BookMealJPanel(Ecosystem es, JPanel clp, Customer cust) {
+        this.es=es;
+        this.CardSequencePanel = clp;
+        this. cust = cust;
+        this.subDetailsDirectory = es.getSubDetailsDirectory();
+        this.bookingDirectory=es.getBookingDirectory();
         initComponents();
+        populateSubscriptionComboBox() ;
+        populateNumberOfMeals();
+        // Add an ActionListener to jComboBox2 to update mealLeft when the selection changes
+        jComboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                populateNumberOfMeals(); // Update mealLeft when the subscription selection changes
+            }
+        });
+
+    }
+//Current Subscription Meal Left
+    private void populateNumberOfMeals() {
+
+        subscriptionId=jComboBox2.getSelectedItem().toString();
+        String customerId=cust.getId();
+
+        for(SubDetails subscription:subDetailsDirectory.getBookingList())
+        {
+            if(subscription.getCID().equals(customerId)&& subscription.getSID().equals(subscriptionId))
+            {
+                numberOfMeals=subscription.getMealsLeft();
+            }
+        }
+        mealLeft.setText(numberOfMeals);
+
+        }
+// User Current Subscription
+        private void populateSubscriptionComboBox() {
+
+        if (subDetailsDirectory != null) {
+        List<String> subs=new ArrayList();
+        String customerId=cust.getId();
+        for(SubDetails subscription:subDetailsDirectory.bagToArray())
+        {
+        if(subscription.getCID().equals(customerId))
+        {
+        subs.add(subscription.getSID());
+        }
+ 
+        }
+
+        // Clear the current items in the combo box
+        jComboBox2.removeAllItems();
+
+        // Add each Subscription Id  name to the combo box
+        for (String subId : subs) {
+            jComboBox2.addItem(subId);
+        }
+    } else {
+        // Handle the case where SubDetailsDirectory is null
+        System.out.println("SubDetailsDirectory instance is null.");
+    }
+    
     }
 
     /**
@@ -30,11 +123,16 @@ public class BookMealJPanel extends javax.swing.JPanel {
         cmbMealType = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        date = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        mealLeft = new javax.swing.JLabel();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -43,15 +141,20 @@ public class BookMealJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbMealType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMealType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VEG", "NON-VEG", "VEGAN", "HALAL" }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AFTERNOON", "NIGHT" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Meal Type");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Date");
+        dateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dateLabel.setText("Date");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Time Slot");
@@ -68,6 +171,26 @@ public class BookMealJPanel extends javax.swing.JPanel {
         jLabel4.setText("Book A Meal");
 
         jButton5.setText("Logout");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        date.setText("dd/mm/yyyy");
+        date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Subscription Id");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setText("Number Of Meals Left");
+
+        mealLeft.setText("jLabel6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,26 +202,36 @@ public class BookMealJPanel extends javax.swing.JPanel {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(238, 238, 238)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbMealType, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbMealType, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mealLeft))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(40, 40, 40)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,18 +240,29 @@ public class BookMealJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
-                .addGap(59, 59, 59)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addGap(65, 65, 65)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(mealLeft))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
                     .addComponent(cmbMealType, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLabel)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addGap(58, 58, 58))
         );
@@ -126,22 +270,107 @@ public class BookMealJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+     CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);   
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
+    String dateString = date.getText();
+    String mealType = cmbMealType.getSelectedItem().toString();
+    String timeSlot = jComboBox1.getSelectedItem().toString();
+
+
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    try {
+        Date dateObject = formatter.parse(dateString);
+        Date currentDate = new Date(); 
+ // Check if the dateObject is before the current date
+        if (!dateObject.after(currentDate)) {
+            JOptionPane.showMessageDialog(this, "Please enter a future date for delivery.");
+            return;  // Stop further processing
+        }
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yy");
+        String formattedDate = outputFormat.format(dateObject);
+
+        System.out.println("Formatted Date: " + formattedDate);
+        System.out.println("Meal Type: " + mealType);
+        System.out.println("Time Slot: " + timeSlot);
+        String customerId=cust.getId();
+        String deliveryPersonId="";
+        String isDelivered="N";
+
+       String mealId = UUID.randomUUID().toString();
+       if(mealType.equals("VEG"))
+        {
+        mealId="444001";
+        }
+        else if(mealType.equals("NON-VEG"))
+        {
+        mealId="444002";
+        }
+        else if(mealType.equals("VEGAN"))
+        {
+        mealId="444003";
+        }
+        else if(mealType.equals("HALAL"))
+        {
+        mealId="444004";
+        }
+        Booking newBooking= bookingDirectory.newBooking(customerId, subscriptionId, mealId, dateObject, timeSlot, deliveryPersonId, isDelivered);
+        //es.getBookingDirectory().displayAllBookings(); 
+       DBConn.addBooking(DBConn.establishConnection(), newBooking);  
+       
+       subDetailsDirectory.updateSubscription(subscriptionId);
+       es.refreshBookingDetails();
+        JOptionPane.showMessageDialog(this, "Meal booked!");
+           CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);  
+
+    } 
+    catch (ParseException e) {
+        System.out.println("Invalid date format. Please use dd/MM/yyyy format.");
+        JOptionPane.showMessageDialog(this, "Invalid date format. Please use dd/MM/yyyy.");
+    } 
+//    catch (SQLException ex) {
+//        Logger.getLogger(SignUpDPJPanel.class.getName()).log(Level.SEVERE, ex.toString(), ex);
+//    } 
+    catch (NumberFormatException nEx) {
+        System.out.println(nEx.toString());
+        JOptionPane.showMessageDialog(this, "Error in input. Please check the data.");
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+ CardSequencePanel.remove(this);
+        CardLayout cardLayout = (CardLayout) CardSequencePanel.getLayout();
+        cardLayout.first(CardSequencePanel);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbMealType;
+    private javax.swing.JTextField date;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel mealLeft;
     // End of variables declaration//GEN-END:variables
 }

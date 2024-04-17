@@ -4,6 +4,17 @@
  */
 package ui.customer;
 
+import java.awt.CardLayout;
+import java.util.UUID;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.example.BookingDirectory;
+import org.example.Ecosystem;
+
+import org.example.dsa.LinkedBag;
+import org.example.persona.Booking;
+import org.example.persona.Customer;
+
 /**
  *
  * @author marri
@@ -13,9 +24,94 @@ public class MealStatusJPanel extends javax.swing.JPanel {
     /**
      * Creates new form MealStatusJPanel
      */
-    public MealStatusJPanel() {
+    Ecosystem es;
+    javax.swing.JPanel CardSequencePanel;
+    Customer cust;
+    BookingDirectory bookingDirectory;
+    public MealStatusJPanel(Ecosystem es, JPanel clp, Customer cust) {
+        this.es=es;
+        this.CardSequencePanel = clp;
+        this.cust = cust;
+        this.bookingDirectory = es.getBookingDirectory();
         initComponents();
+        populateBookingTable() ;
+
     }
+  private void populateBookingTable() {
+
+      
+
+       LinkedBag<Booking> linkedbag = new LinkedBag<>();
+       String customerId=cust.getId();
+    
+       // Add all bookings from BookingDirectory to the priority queue
+       if (bookingDirectory != null && bookingDirectory.getBookingList() != null) {
+        for (Booking booking : bookingDirectory.getBookingList()) {
+            System.out.println("booking: ----"+booking.toString()+"---");
+                if(customerId.equals(booking.getCustomerId()))
+//                {
+//                System.out.println("booking2: ----"+booking.toString()+"---");
+//                linkedbag.add(booking);
+//                }
+                linkedbag.add(booking);
+          
+        }
+        
+    }
+// Meal Type
+ 
+       
+
+    // Define columns for the table model
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Meal ID");
+    model.addColumn("Meal Type");
+    model.addColumn("Booking Date");
+    model.addColumn("Date of Delivery");
+    model.addColumn("Time Slot");
+    model.addColumn("Delivery Partner ID");
+    model.addColumn("Is Delivered");
+
+    // Iterate through the priority queue and add rows to the model
+    while (!linkedbag.isEmpty()) {
+        Booking booking = linkedbag.remove();
+        model.addRow(new Object[]{
+            booking.getMealId(),
+            getMealType(booking.getMealId()),
+            booking.getBookingDate(),
+            booking.getDateOfDelivery(),
+            booking.getTimeSlot(),
+            booking.getDeliveryPersonId(),
+            booking.isDelivered()
+        });
+    }
+
+    // Set the model for the jTable1
+    jTable1.setModel(model);
+    }
+private String getMealType(String mealId)
+{
+     
+String mealType = UUID.randomUUID().toString();
+       if(mealId.equals("444001"))
+        {
+        mealType="VEG";
+        }
+        else if(mealId.equals("444002"))
+        {
+        mealType="NON-VEG";
+        }
+  else if(mealId.equals("444003"))
+        {
+        mealType="VEGAN";
+        }
+  else if(mealId.equals("444004"))
+        {
+        mealType="HALAL";
+        }
+return mealType;
+}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +153,11 @@ public class MealStatusJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButton5.setText("Logout");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -91,7 +192,18 @@ public class MealStatusJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel); 
+        //populateBookingTable();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout cardLayout = (CardLayout) CardSequencePanel.getLayout();
+        cardLayout.first(CardSequencePanel);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

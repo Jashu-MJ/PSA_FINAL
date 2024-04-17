@@ -44,4 +44,8 @@ public class Ecosystem {
     public void refreshSubDetails(){
         subDetailsDirectory.subDetailsList = DBConn.getSubDetailsFromDB(this.conn);
     }
+      public void refreshBookingDetails(){
+        bookingDirectory = new BookingDirectory(DBConn.getBookFromDB(this.conn));
+        //bookingDirectory.displayAllBookings();
+    }
     }
