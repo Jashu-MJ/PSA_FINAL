@@ -123,7 +123,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnSignup">
-
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sign Up"/>
               </Properties>
@@ -149,7 +148,6 @@
                 <Property name="text" type="java.lang.String" value="username"/>
               </Properties>
             </Component>
-
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="CardSequencePanel">
@@ -170,8 +168,10 @@
                   <Color blue="ff" green="99" red="66" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Spice Squad"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JLabel(new ImageIcon(myPicture))"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card2"/>

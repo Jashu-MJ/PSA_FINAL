@@ -6,11 +6,16 @@
 package ui;
 
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.example.ConfigureSystem;
@@ -32,15 +37,18 @@ import ui.manager.ManagerJPanel;
 public class WorkAreaMainFrame extends javax.swing.JFrame {
 
     Ecosystem es;
+    BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\marri\\OneDrive\\Desktop\\PSA\\PSA_FINAL\\psa\\src\\main\\java\\ui\\icon.jpg"));
+
 
     /**
      * Creates new form PricingMainFrame
      */
-    public WorkAreaMainFrame() {
+    public WorkAreaMainFrame() throws IOException {
         initComponents();
             es = ConfigureSystem.initialize();
 
-
+        //jLabel3.setIcon(new ImageIcon(myPicture));
+        //CardSequencePanel.add(jLabel3);
     }
 
     /**
@@ -63,7 +71,7 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         ddUser = new javax.swing.JComboBox<>();
         txtUsername = new javax.swing.JTextField();
         CardSequencePanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel(new ImageIcon(myPicture));
 
         UserNameTextField.setText("admin");
 
@@ -121,7 +129,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
                     .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +157,6 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 153, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Spice Squad");
         CardSequencePanel.add(jLabel3, "card2");
 
         SplitHomeArea.setRightComponent(CardSequencePanel);
@@ -239,7 +245,11 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WorkAreaMainFrame().setVisible(true);
+                try {
+                    new WorkAreaMainFrame().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(WorkAreaMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -257,6 +267,5 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtUsername;
-
     // End of variables declaration//GEN-END:variables
 }
