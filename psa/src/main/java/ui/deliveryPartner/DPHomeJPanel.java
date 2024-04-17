@@ -220,9 +220,9 @@ private void populateDPTable() {
     // Add all bookings from BookingDirectory to the priority queue
     if (bookingDirectory != null && bookingDirectory.getBookingList() != null) {
         for (Booking booking : bookingDirectory.getBookingList()) {
-            if(booking.getDeliveryPersonId().equals(dp.getId())){
+            if (booking.getDeliveryPersonId() != null && booking.getDeliveryPersonId().equals(dp.getId())) {
                 priorityQueue.add(booking);
-            }
+                }
             
         }
         

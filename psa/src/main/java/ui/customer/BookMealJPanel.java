@@ -67,6 +67,8 @@ public class BookMealJPanel extends javax.swing.JPanel {
     }
 //Current Subscription Meal Left
     private void populateNumberOfMeals() {
+es.refreshSubDetails();
+es.refreshBookingDetails();
 
         subscriptionId=jComboBox2.getSelectedItem().toString();
         String customerId=cust.getId();
@@ -80,10 +82,12 @@ public class BookMealJPanel extends javax.swing.JPanel {
         }
         mealLeft.setText(numberOfMeals);
 
+
         }
 // User Current Subscription
         private void populateSubscriptionComboBox() {
-
+es.refreshSubDetails();
+es.refreshBookingDetails();
         if (subDetailsDirectory != null) {
         List<String> subs=new ArrayList();
         String customerId=cust.getId();

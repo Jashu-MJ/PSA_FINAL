@@ -6,11 +6,16 @@
 package ui;
 
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.example.BookingDirectory;
@@ -37,8 +42,10 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
     /**
      * Creates new form PricingMainFrame
      */
-    public WorkAreaMainFrame() {
+    public WorkAreaMainFrame() throws IOException {
         initComponents();
+
+
             es = ConfigureSystem.initialize();
         
         
@@ -242,8 +249,14 @@ public class WorkAreaMainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WorkAreaMainFrame().setVisible(true);
+                try{
+new WorkAreaMainFrame().setVisible(true);
+}catch(Exception e)
+{
+System.out.println(e);
+}
             }
+
         });
     }
 
